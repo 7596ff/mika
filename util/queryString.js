@@ -5,5 +5,5 @@ module.exports = (options) => {
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(options[p]));
         }
     }
-    return str.join("&");
+    return `?${str.join("&")}`;
 }
