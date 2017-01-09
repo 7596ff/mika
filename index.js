@@ -32,6 +32,8 @@ function Mika() {
 
     this.getDistributions = require('./lib/distributions/getDistributions')
 
+    this.getRankings = require('./lib/rankings/getRankings')
+
     this.search = require('./lib/search/search')
 }
 
