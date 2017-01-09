@@ -18,7 +18,9 @@ function Mika() {
         postPlayerRefresh: require('./lib/players/postPlayerRefresh')
     }
 
-    this.getProPlayers = require('./lib/proPlayers/getProPlayers.js')
+    this.getProPlayers = require('./lib/proPlayers/getProPlayers')
+
+    this.getProMatches = require('./lib/proMatches/getProMatches')
 
     this.constants = require('./constants')
 }
