@@ -1,4 +1,6 @@
 function Mika() {
+    this.constants = require('./constants')
+
     this.getMatch = require('./lib/matches/getMatch')
     
     this.players = {
@@ -26,7 +28,7 @@ function Mika() {
 
     this.getHeroStats = require('./lib/heroStats/getHeroStats')
 
-    this.constants = require('./constants')
+    this.getMetadata = require('./lib/metadata/getMetadata')
 }
 
 module.exports = Mika
