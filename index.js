@@ -22,6 +22,8 @@ function Mika() {
 
     this.getProMatches = require('./lib/proMatches/getProMatches')
 
+    this.getPublicMatches = require('./lib/publicMatches/getPublicMatches')
+
     this.constants = require('./constants')
 }
 
