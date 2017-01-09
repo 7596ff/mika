@@ -16,7 +16,8 @@ function Mika() {
         getPlayerWardmap: require('./lib/players/getPlayerWardmap'),
         getPlayerWordcloud: require('./lib/players/getPlayerWordcloud'),
         getPlayerRatings: require('./lib/players/getPlayerRatings'),
-        getPlayerRankings: require('./lib/players/getPlayerRankings')
+        getPlayerRankings: require('./lib/players/getPlayerRankings'),
+        postPlayerRefresh: require('./lib/players/postPlayerRefresh')
     }
 
     this.constants = require('./constants')
