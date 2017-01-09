@@ -31,6 +31,8 @@ function Mika() {
     this.getMetadata = require('./lib/metadata/getMetadata')
 
     this.getDistributions = require('./lib/distributions/getDistributions')
+
+    this.search = require('./lib/search/search')
 }
 
 module.exports = Mika
