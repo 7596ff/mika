@@ -1,7 +1,5 @@
 function Mika() {
-    this.matches = {
-        getMatch: require('./lib/matches/getMatch')
-    }
+    this.getMatch = require('./lib/matches/getMatch')
     
     this.players = {
         getPlayer: require('./lib/players/getPlayer'),
