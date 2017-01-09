@@ -32,9 +32,11 @@ function Mika() {
 
     this.getDistributions = require('./lib/distributions/getDistributions')
 
+    this.search = require('./lib/search/search')
+    
     this.getRankings = require('./lib/rankings/getRankings')
 
-    this.search = require('./lib/search/search')
+    this.getBenchmarks = require('./lib/benchmarks/getBenchmarks')
 }
 
 module.exports = Mika
