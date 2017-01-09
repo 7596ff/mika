@@ -18,6 +18,8 @@ function Mika() {
         postPlayerRefresh: require('./lib/players/postPlayerRefresh')
     }
 
+    this.getProPlayers = require('./lib/proPlayers/getProPlayers.js')
+
     this.constants = require('./constants')
 }
 
