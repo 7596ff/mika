@@ -8,7 +8,8 @@ function Mika() {
         getPlayerWL: require('./lib/players/getPlayerWL.js'),
         getPlayerMatches: require('./lib/players/getPlayerMatches.js'),
         getPlayerHeroes: require('./lib/players/getPlayerHeroes.js'),
-        getPlayerPeers: require('./lib/players/getPlayerPeers.js')
+        getPlayerPeers: require('./lib/players/getPlayerPeers.js'),
+        getPlayerPros: require('./lib/players/getPlayerPros.js')
     }
 }
 
