@@ -29,6 +29,8 @@ function Mika() {
     this.getHeroStats = require('./lib/heroStats/getHeroStats')
 
     this.getMetadata = require('./lib/metadata/getMetadata')
+
+    this.getDistributions = require('./lib/distributions/getDistributions')
 }
 
 module.exports = Mika
