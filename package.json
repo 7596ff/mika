@@ -1,0 +1,28 @@
+{
+  "name": "mika",
+  "version": "0.0.1",
+  "description": "a javascript wrapper for the opendota api",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "request": "^2.79.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bippum/mika.git"
+  },
+  "keywords": [
+    "opendota",
+    "open",
+    "dota",
+    "dota2"
+  ],
+  "author": "bippum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bippum/mika/issues"
+  },
+  "homepage": "https://github.com/bippum/mika#readme"
+}
