@@ -11,6 +11,7 @@ mika.players.getPlayer('103637655').then((player) => {
     console.log(`body: ${response.body}`)
 })
 
+mika.players.getPlayerCounts('103637655').then((counts) => {
     let leavers = 0
     for (leaver_stat in counts.leaver_status) {
         if (leaver_stat != "0") {
