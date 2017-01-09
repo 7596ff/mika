@@ -5,7 +5,8 @@ function Mika() {
     
     this.players = {
         getPlayer: require('./lib/players/getPlayer.js'),
-        getPlayerWL: require('./lib/players/getPlayerWL.js')
+        getPlayerWL: require('./lib/players/getPlayerWL.js'),
+        getPlayerMatches: require('./lib/players/getPlayerMatches.js')
     }
 }
 
