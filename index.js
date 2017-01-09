@@ -11,8 +11,11 @@ function Mika() {
         getPlayerPeers: require('./lib/players/getPlayerPeers'),
         getPlayerPros: require('./lib/players/getPlayerPros'),
         getPlayerRecords: require('./lib/players/getPlayerRecords'),
-        getPlayerCounts: require('./lib/players/getPlayerCounts')        
+        getPlayerCounts: require('./lib/players/getPlayerCounts'),
+        getPlayerHistograms: require('./lib/players/getPlayerHistograms')
     }
+
+    this.constants = require('./constants')
 }
 
 module.exports = Mika

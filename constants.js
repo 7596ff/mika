@@ -1,1 +1,33 @@
 module.exports.BaseURL = "https://api.opendota.com/api"
+
+module.exports.HistogramFields = {
+    "Kills": "kills",
+    "Deaths": "deaths",
+    "Assists": "assists",
+    "KDA": "kda",
+    "GoldPerMinute": "gold_per_min",
+    "XPPerMinute": "xp_per_min",
+    "LastHits": "last_hits",
+    "Denies": "denies",
+    "LaneEfficiencyPercentage": "lane_efficiency_pct",
+    "Duration": "duration",
+    "Level": "level",
+    "HeroDamage": "hero_damage",
+    "TowerDamage": "tower_damage",
+    "HeroHealing": "hero_healing",
+    "Stuns": "stuns",
+    "TowerKills": "tower_kills",
+    "NeutralKills": "neutral_kills",
+    "CourierKills": "courier_kills",
+    "TPsPurchased": "purchase_tpscroll",
+    "ObserversPurchased": "purchase_ward_observer",
+    "SentriesPurchased": "purchase_ward_sentry",
+    "GemsPurchased": "purchase_gem",
+    "RapiersPurchased": "purchase_rapier",
+    "MapPings": "pings",
+    "Throw": "throw",
+    "Comeback": "comeback",
+    "Stomp": "stomp",
+    "Loss": "loss",
+    "ActionsPerMinute": "actions_per_min"
+}
