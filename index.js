@@ -41,6 +41,11 @@ function Mika() {
     this.getStatus = require('./lib/status/getStatus')
 
     this.getHealth = require('./lib/health/getHealth')
+
+    this.request = {
+        "getByJobId": require('./lib/request/getRequestByJobId'),
+        "getByMatchId": require('./lib/request/getRequestByMatchId')
+    }
 }
 
 module.exports = Mika
