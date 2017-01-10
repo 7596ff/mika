@@ -37,6 +37,10 @@ function Mika() {
     this.getRankings = require('./lib/rankings/getRankings')
 
     this.getBenchmarks = require('./lib/benchmarks/getBenchmarks')
+
+    this.getStatus = require('./lib/status/getStatus')
+
+    this.getHealth = require('./lib/health/getHealth')
 }
 
 module.exports = Mika
