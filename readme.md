@@ -34,6 +34,4 @@ mika.players.getPlayerCounts('<your account id>').then((counts) => {
 })
 ```
 
-###docs
-
-coming soon.
+###[docs](https://bippum.github.io/mika-docs/)
