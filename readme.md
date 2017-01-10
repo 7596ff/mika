@@ -12,12 +12,12 @@ const Mika = require('./index.js')
 var mika = new Mika();
 
 mika.players.getPlayer('103637655').then((player) => {
-    console.log(\`Solo MMR: ${player.solo_competitive_rank}\`)
-    console.log(\`Account ID: ${player.profile.account_id}\`)
-    console.log(\`Name: ${player.profile.personaname}\`)
+    console.log(`Solo MMR: ${player.solo_competitive_rank}`)
+    console.log(`Account ID: ${player.profile.account_id}`)
+    console.log(`Name: ${player.profile.personaname}`)
 }).catch((response) => {
-    console.log(\`statusCode: ${response.statusCode}\`)
-    console.log(\`body: ${response.body}\`)
+    console.log(`statusCode: ${response.statusCode}`)
+    console.log(`body: ${response.body}`)
 })
 
 mika.players.getPlayerCounts('103637655').then((counts) => {
@@ -27,10 +27,10 @@ mika.players.getPlayerCounts('103637655').then((counts) => {
             leavers += counts.leaver_status[leaver_stat].games
         }
     }
-    console.log(\`\nGames with at least one leaver: ${leavers}\`)
+    console.log(`\nGames with at least one leaver: ${leavers}`)
 }).catch((response) => {
-    console.log(\`statusCode: ${response.statusCode}\`)
-    console.log(\`body: ${response.body}\`)
+    console.log(`statusCode: ${response.statusCode}`)
+    console.log(`body: ${response.body}`)
 })
 ```
 
