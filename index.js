@@ -1,6 +1,6 @@
 function Mika() {
     this.constants           = require('./constants')
-    this.getMatch            = require('./lib/matches/getMatch')
+    this.getMatch            = require('./lib/getMatch')
     this.players = {
         "getPlayer":           require('./lib/players/getPlayer'),
         "getPlayerWL":         require('./lib/players/getPlayerWL'),
@@ -17,24 +17,24 @@ function Mika() {
         "getPlayerRankings":   require('./lib/players/getPlayerRankings'),
         "postPlayerRefresh":   require('./lib/players/postPlayerRefresh')
     }
-    this.getProPlayers       = require('./lib/proPlayers/getProPlayers')
-    this.getProMatches       = require('./lib/proMatches/getProMatches')
-    this.getPublicMatches    = require('./lib/publicMatches/getPublicMatches')
-    this.getHeroStats        = require('./lib/heroStats/getHeroStats')
-    this.getMetadata         = require('./lib/metadata/getMetadata')
-    this.getDistributions    = require('./lib/distributions/getDistributions')
-    this.search              = require('./lib/search/search')
-    this.getRankings         = require('./lib/rankings/getRankings')
-    this.getBenchmarks       = require('./lib/benchmarks/getBenchmarks')
-    this.getStatus           = require('./lib/status/getStatus')
-    this.getHealth           = require('./lib/health/getHealth')
+    this.getProPlayers       = require('./lib/getProPlayers')
+    this.getProMatches       = require('./lib/getProMatches')
+    this.getPublicMatches    = require('./lib/getPublicMatches')
+    this.getHeroStats        = require('./lib/getHeroStats')
+    this.getMetadata         = require('./lib/getMetadata')
+    this.getDistributions    = require('./lib/getDistributions')
+    this.search              = require('./lib/search')
+    this.getRankings         = require('./lib/getRankings')
+    this.getBenchmarks       = require('./lib/getBenchmarks')
+    this.getStatus           = require('./lib/getStatus')
+    this.getHealth           = require('./lib/getHealth')
     this.request = {
         "getByJobId":          require('./lib/request/getRequestByJobId'),
         "postByMatchId":       require('./lib/request/postRequestByMatchId')
     }
-    this.getHeroes           = require('./lib/heroes/getHeroes')
-    this.getLeagues          = require('./lib/leagues/getLeagues')
-    this.getReplays          = require('./lib/replays/getReplays')
+    this.getHeroes           = require('./lib/getHeroes')
+    this.getLeagues          = require('./lib/getLeagues')
+    this.getReplays          = require('./lib/getReplays')
 }
 
 module.exports = Mika
