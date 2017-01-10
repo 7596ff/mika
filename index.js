@@ -48,6 +48,10 @@ function Mika() {
     }
 
     this.getHeroes = require('./lib/heroes/getHeroes')
+
+    this.getLeagues = require('./lib/leagues/getLeagues')
+
+    this.getReplays = require('./lib/replays/getReplays')
 }
 
 module.exports = Mika
