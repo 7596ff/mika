@@ -1,6 +1,6 @@
-![NPM](https://nodei.co/npm/mika.png)](https://nodei.co/npm/mika/)
+[![NPM](https://nodei.co/npm/mika.png)](https://nodei.co/npm/mika/)
 
-##mika ![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
+##mika [![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
 
 a javascript wrapper for the opendota api.
 
