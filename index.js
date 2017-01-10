@@ -44,7 +44,7 @@ function Mika() {
 
     this.request = {
         "getByJobId": require('./lib/request/getRequestByJobId'),
-        "getByMatchId": require('./lib/request/getRequestByMatchId')
+        "postByMatchId": require('./lib/request/postRequestByMatchId')
     }
 }
 
