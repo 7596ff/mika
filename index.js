@@ -46,6 +46,8 @@ function Mika() {
         "getByJobId": require('./lib/request/getRequestByJobId'),
         "postByMatchId": require('./lib/request/postRequestByMatchId')
     }
+
+    this.getHeroes = require('./lib/heroes/getHeroes')
 }
 
 module.exports = Mika
