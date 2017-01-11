@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/mika.png)](https://nodei.co/npm/mika/)
+[![NPM](https://nodei.co/npm/mika.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mika/)
 
 ##mika [![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
 
