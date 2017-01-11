@@ -2,7 +2,7 @@
 
 ##mika [![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
 
-a javascript wrapper for the opendota api.
+an unofficial javascript wrapper for the opendota api.
 
 ###examples
 
