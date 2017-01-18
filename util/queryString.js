@@ -1,4 +1,4 @@
-module.exports = (options) => {
+function queryString(options) {
     var str = [];
     for(var p in options) {
         if (options.hasOwnProperty(p)) {
@@ -7,3 +7,5 @@ module.exports = (options) => {
     }
     return str.join("&");
 }
+
+module.exports = queryString
