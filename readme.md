@@ -33,3 +33,4 @@ mika.getPlayerCounts('<your account id>').then((counts) => {
     console.log(`body: ${response.body}`)
 })
 ```
+test.
