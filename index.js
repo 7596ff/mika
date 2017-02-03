@@ -1,22 +1,23 @@
+var Bucket = require('./util/bucket')
+
 function Mika() {
+    this.bucket              = new Bucket()
     this.constants           = require('./constants')
     this.getMatch            = require('./lib/getMatch')
-    this.players = {
-        "getPlayer":           require('./lib/players/getPlayer'),
-        "getPlayerWL":         require('./lib/players/getPlayerWL'),
-        "getPlayerMatches":    require('./lib/players/getPlayerMatches'),
-        "getPlayerHeroes":     require('./lib/players/getPlayerHeroes'),
-        "getPlayerPeers":      require('./lib/players/getPlayerPeers'),
-        "getPlayerPros":       require('./lib/players/getPlayerPros'),
-        "getPlayerRecords":    require('./lib/players/getPlayerRecords'),
-        "getPlayerCounts":     require('./lib/players/getPlayerCounts'),
-        "getPlayerHistograms": require('./lib/players/getPlayerHistograms'),
-        "getPlayerWardmap":    require('./lib/players/getPlayerWardmap'),
-        "getPlayerWordcloud":  require('./lib/players/getPlayerWordcloud'),
-        "getPlayerRatings":    require('./lib/players/getPlayerRatings'),
-        "getPlayerRankings":   require('./lib/players/getPlayerRankings'),
-        "postPlayerRefresh":   require('./lib/players/postPlayerRefresh')
-    }
+    this.getPlayer           = require('./lib/players/getPlayer')
+    this.getPlayerWL         = require('./lib/players/getPlayerWL')
+    this.getPlayerMatches    = require('./lib/players/getPlayerMatches')
+    this.getPlayerHeroes     = require('./lib/players/getPlayerHeroes')
+    this.getPlayerPeers      = require('./lib/players/getPlayerPeers')
+    this.getPlayerPros       = require('./lib/players/getPlayerPros')
+    this.getPlayerRecords    = require('./lib/players/getPlayerRecords')
+    this.getPlayerCounts     = require('./lib/players/getPlayerCounts')
+    this.getPlayerHistograms = require('./lib/players/getPlayerHistograms')
+    this.getPlayerWardmap    = require('./lib/players/getPlayerWardmap')
+    this.getPlayerWordcloud  = require('./lib/players/getPlayerWordcloud')
+    this.getPlayerRatings    = require('./lib/players/getPlayerRatings')
+    this.getPlayerRankings   = require('./lib/players/getPlayerRankings')
+    this.postPlayerRefresh   = require('./lib/players/postPlayerRefresh')
     this.getProPlayers       = require('./lib/getProPlayers')
     this.getProMatches       = require('./lib/getProMatches')
     this.getPublicMatches    = require('./lib/getPublicMatches')
@@ -28,10 +29,8 @@ function Mika() {
     this.getBenchmarks       = require('./lib/getBenchmarks')
     this.getStatus           = require('./lib/getStatus')
     this.getHealth           = require('./lib/getHealth')
-    this.request = {
-        "getByJobId":          require('./lib/request/getRequestByJobId'),
-        "postByMatchId":       require('./lib/request/postRequestByMatchId')
-    }
+    this.getByJobId          = require('./lib/request/getRequestByJobId')
+    this.postByMatchId       = require('./lib/request/postRequestByMatchId')
     this.getHeroes           = require('./lib/getHeroes')
     this.getLeagues          = require('./lib/getLeagues')
     this.getReplays          = require('./lib/getReplays')

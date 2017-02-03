@@ -11,7 +11,7 @@ const Mika = require('mika')
 
 var mika = new Mika();
 
-mika.players.getPlayer('<your account id>').then((player) => {
+mika.getPlayer('<your account id>').then((player) => {
     console.log(`Solo MMR: ${player.solo_competitive_rank}`)
     console.log(`Account ID: ${player.profile.account_id}`)
     console.log(`Name: ${player.profile.personaname}`)
@@ -20,7 +20,7 @@ mika.players.getPlayer('<your account id>').then((player) => {
     console.log(`body: ${response.body}`)
 })
 
-mika.players.getPlayerCounts('<your account id>').then((counts) => {
+mika.getPlayerCounts('<your account id>').then((counts) => {
     let leavers = 0
     for (leaver_stat in counts.leaver_status) {
         if (leaver_stat != "0") {
@@ -33,5 +33,3 @@ mika.players.getPlayerCounts('<your account id>').then((counts) => {
     console.log(`body: ${response.body}`)
 })
 ```
-
-###[docs](https://bippum.github.io/mika-docs/)
