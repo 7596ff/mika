@@ -41,3 +41,15 @@ mika.getHealth().then(health => {
     console.log(`statusCode: ${response.statusCode}`)
     console.log(`body: ${response.body}`)
 })
+
+console.log('starting getPlayerMatches with restrictions on latest match')
+mika.getPlayerMatches("103637655", {
+    "limit": 1,
+    "included_account_id": ["65158495", "101766284"]
+}).then(resp => {
+    console.log("Latest match with Bob and Tyler:")
+    console.log(resp[0].match_id)
+}).catch((response) => {
+    console.log(`statusCode: ${response.statusCode}`)
+    console.log(`body: ${response.body}`)
+})
