@@ -7,7 +7,7 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "request": "^2.79.0"
+    "needle": "1.5.2"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "dota2"
   ],
   "author": "bippum",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bippum/mika/issues"
   },
