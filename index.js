@@ -3,6 +3,9 @@ const needle = require("needle");
 const Bucket = require("./util/Bucket");
 const constants = require("./constants");
 
+/**
+ * The bigol thing
+ */
 class Mika {
     constructor() {
         this.bucket = new Bucket();
@@ -23,10 +26,6 @@ class Mika {
             }
         }
         return `?${args.join("&")}`;
-    }
-
-    _percentEncode(sql) {
-        return sql; // TODO
     }
 
     _requestHandler(method, url, options, attempts = 0, topResolve, topReject) {
@@ -407,7 +406,7 @@ class Mika {
      * @param {boolean} [encoded=false] - Whether or not the supplied string is percent encoded (false to auto encode)
      */
     explorer(sql, encoded) {
-        if (!encoded) sql = this._percentEncode(sql); // TODO
+        if (!encoded) sql = encodeURI(sql);
         return this._requestHandler("GET", `/explorer?sql=${sql}`);
     }
 
