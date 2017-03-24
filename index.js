@@ -402,7 +402,7 @@ class Mika {
 
     /**
      * Submit arbitrary SQL queries to the database
-     * @param {string} sql - The string sql query to submit - visit https://www.opendota.com/explorer for details
+     * @param {string} sql - The string sql query to submit - visit {@link https://www.opendota.com/explorer|the OpenDota explorer page} for details
      * @param {boolean} [encoded=false] - Whether or not the supplied string is percent encoded (false to auto encode)
      */
     explorer(sql, encoded) {
