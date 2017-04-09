@@ -29,6 +29,7 @@ class Mika {
     }
 
     _requestHandler(method, url, options) {
+        url = this.baseURL + url;
         if (options) url += this._queryString(options);
         return new Promise((resolve, reject) => {
             this.bucket.enqueue(function() {
