@@ -35,14 +35,14 @@ class Mika {
                 needle.request(method, url, null, (err, response, body) => {
                     if (!err && response.statusCode == 200) {
                         resolve(body);
-                    } else if (err) {
-                        reject(err);
                     } else {
-                        if (response.statusCode == 500) {
+                        if (response && response.statusCode == 500) {
                             reject({
                                 "code": response.statusCode,
-                                "error": body.error
+                                "error": body
                             });
+                        } else {
+                            reject(err);
                         }
                     }
                 });
