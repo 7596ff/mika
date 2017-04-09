@@ -28,14 +28,13 @@ class Mika {
         return `?${args.join("&")}`;
     }
 
-    _requestHandler(method, url, options, attempts = 0, topResolve, topReject) {
-        if (attempts == 0) url = this.baseURL + url;
+    _requestHandler(method, url, options) {
         if (options) url += this._queryString(options);
         return new Promise((resolve, reject) => {
             this.bucket.enqueue(function() {
                 needle.request(method, url, null, (err, response, body) => {
                     if (!err && response.statusCode == 200) {
-                        topResolve ? topResolve(body) : resolve(body);
+                        resolve(body);
                     } else if (err) {
                         reject(err);
                     } else {
@@ -44,15 +43,6 @@ class Mika {
                                 "code": response.statusCode,
                                 "error": body.error
                             });
-                        } else {
-                            if (attempts > 2) {
-                                reject({
-                                    "code": -1,
-                                    "error": "Too many attempts, timing out"
-                                });
-                            } else {
-                                this._requestHandler(method, url, null, attempts + 1, resolve, reject);
-                            }
                         }
                     }
                 });
@@ -154,7 +144,7 @@ class Mika {
      */
     getPlayerHeroes(accountID, options) {
         if (options) options = this._queryString(options);
-        return this._requestHandler("GET", `/players/${accountID}/getPlayerHeroes${options || ""}`);
+        return this._requestHandler("GET", `/players/${accountID}/heroes${options || ""}`);
     }
 
     /**
