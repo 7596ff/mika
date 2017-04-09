@@ -30,7 +30,7 @@ console.log('starting getPlayerWL')
 mika.getPlayerWL('103637655').then(wl => {
     console.log(`Wins: ${wl.win}`);
     console.log(`Loss: ${wl.lose}`);
-    console.log(`Winrate: ${(wl.win / wl.win + wl.lose) * 100}`);
+    console.log(`Winrate: ${(wl.win / (wl.win + wl.lose)) * 100}`);
 }).catch((err) => {
     console.log(err);
     process.exit(1);
