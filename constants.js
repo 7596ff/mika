@@ -31,4 +31,4 @@ module.exports = {
         "Loss": "loss",
         "ActionsPerMinute": "actions_per_min"
     }
-);
+};
