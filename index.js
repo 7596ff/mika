@@ -7,8 +7,9 @@ const constants = require("./constants");
  * The bigol thing
  */
 class Mika {
-    constructor() {
-        this.bucket = new Bucket();
+    constructor(limit) {
+        if (limit < 1) limit = 1;
+        this.bucket = new Bucket(limit || 1);
         this.baseURL = constants.BaseURL;
     }
 
