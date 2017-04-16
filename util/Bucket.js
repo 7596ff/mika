@@ -1,5 +1,5 @@
 class Bucket {
-    constructor(limit = 1) {
+    constructor(limit) {
         this.limit = limit * 1000;
         this._queue = [];
         this.last_time = Date.now() - 1000;
