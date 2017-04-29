@@ -1,5 +1,6 @@
 module.exports = {
     "BaseURL": "https://api.opendota.com/api",
+    "WebsocketURL": "wss://feed.opendota.com/",
     "HistogramFields": {
         "Kills": "kills",
         "Deaths": "deaths",

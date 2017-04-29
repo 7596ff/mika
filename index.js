@@ -1,6 +1,7 @@
 const needle = require("needle");
 
 const Bucket = require("./util/Bucket");
+const FeedClient = require("./util/FeedClient");
 const constants = require("./constants");
 
 /**
@@ -501,4 +502,5 @@ class Mika {
     }
 }
 
+Mika.FeedClient = FeedClient;
 module.exports = Mika;
