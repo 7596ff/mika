@@ -7,7 +7,9 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "needle": "1.5.2"
+    "needle": "1.5.2",
+    "nonce": "^1.0.4",
+    "ws": "2.3.1"
   },
   "repository": {
     "type": "git",
