@@ -124,7 +124,7 @@ class FeedClient extends EventEmitter {
                 // start heartbeating
                 this.intervalID = setInterval(() => {
                     setTimeout(() => {
-                        this.ping().catch((err) => console.error(err));
+                        this.ping().catch((err) => this.emit("error", err));
                     }, Math.floor(Math.random() * 10000)); // add random jitter 
                 }, 60000);
             });
