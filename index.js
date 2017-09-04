@@ -97,6 +97,14 @@ class Mika {
     }
     
     /**
+     * Returns summaries of the last 20 matches of a specified account id
+     * @param {number} accountID - Which account to request
+     */
+    getPlayerRecentMatches(accountID) {
+        return this._requestHandler("GET", `/players/${accountID}/recentMatches`);
+    }
+    
+    /**
      * Returns matches played for a specified account id
      * @param {number} accountID - Which account to request
      * @param {object} [options] - Query paramaters for the request
