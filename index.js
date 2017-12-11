@@ -8,9 +8,8 @@ const constants = require("./constants");
  * The bigol thing
  */
 class Mika {
-    constructor(limit) {
-        if (limit < 1) limit = 1;
-        this.bucket = new Bucket(limit || 1);
+    constructor() {
+        this.bucket = new Bucket(1 / 3);
         this.baseURL = constants.BaseURL;
     }
 
@@ -234,9 +233,9 @@ class Mika {
      * @param {number} options.significant - Whether the match was significant for aggregation purposes (1 for yes, 0 for no)
      * @param {string} options.sort - The field to return matches sorted by in descending order
      */
-    getPlayerRecords(accountID, options) {
+    getPlayerTotals(accountID, options) {
         if (options) options = this._queryString(options);
-        return this._requestHandler("GET", `/players/${accountID}/records${options || ""}`);
+        return this._requestHandler("GET", `/players/${accountID}/totals${options || ""}`);
     }
 
     /**
@@ -395,13 +394,6 @@ class Mika {
     }
 
     /**
-     * Returns an array of hero stats in recent matches
-     */
-    getHeroStats() {
-        return this._requestHandler("GET", `/heroStats`);
-    }
-
-    /**
      * Submit arbitrary SQL queries to the database
      * @param {string} sql - The string sql query to submit - visit {@link https://www.opendota.com/explorer|the OpenDota explorer page} for details
      * @param {boolean} [encoded=false] - Whether or not the supplied string is percent encoded (false to auto encode)
@@ -488,6 +480,45 @@ class Mika {
     }
 
     /**
+     * Returns an array of recent matches with a hero.
+     * @param {number} heroID - The hero ID
+     */
+    getHeroMatches(heroID) {
+        return this._requestHandler("GET", `/heroes/${heroID}/matches`);
+    }
+
+    /**
+     * Returns results of a particular hero against other heroes.
+     * @param {number} heroID - The hero ID
+     */
+    getHeroMatchups(heroID) {
+        return this._requestHandler("GET", `/heroes/${heroID}/matchups`);
+    }
+
+    /**
+     * Returns hero preformance over a range of match durations.
+     * @param {number} heroID - The hero ID
+     */
+    getHeroDurations(heroID) {
+        return this._requestHandler("GET", `/heroes/${heroID}/durations`);
+    }
+
+    /**
+     * Returns players who have played this hero.
+     * @param {number} heroID - The hero ID
+     */
+    getHeroPlayers(heroID) {
+        return this._requestHandler("GET", `/heroes/${heroID}/players`);
+    }
+
+    /**
+     * Returns an array of hero stats in recent matches
+     */
+    getHeroStats() {
+        return this._requestHandler("GET", `/heroStats`);
+    }
+
+    /**
      * Returns an array of leagues in the game
      */
     getLeagues() {
@@ -502,13 +533,68 @@ class Mika {
     }
 
     /**
+     * Gets data for a team.
+     * @param {number} teamID - The team ID
+     */
+    getTeam(teamID) {
+        return this._requestHandler("GET", `/teams/${teamID}`);
+    }
+
+    /**
+     * Gets matches for a team.
+     * @param {number} teamID - The team ID
+     */
+    getTeamMatches(teamID) {
+        return this._requestHandler("GET", `/teams/${teamID}/matches`);
+    }
+
+    /**
+     * Gets players who have played for a team.
+     * @param {number} teamID - The team ID
+     */
+    getTeamPlayers(teamID) {
+        return this._requestHandler("GET", `/teams/${teamID}/players`);
+    }
+
+    /**
+     * Gets heroes a team has played.
+     * @param {number} teamID - The team ID
+     */
+    getTeamHeroes(teamID) {
+        return this._requestHandler("GET", `/teams/${teamID}/heroes`);
+    }
+
+    /**
      * Returns data to construct a replay URL with
      @param {number} matchID - 
      */
     getReplays(matchID) {
         return this._requestHandler("GET", `/replays?match_id=${matchID}`);
     }
+
+    /**
+     * Gets top preformances in a stat.
+     * @param {string} field - The field (See <Mika>.Constants)
+     */
+    getRecords(field) {
+        return this._requestHandler("GET", `/records/${field}`);
+    }
+
+    /**
+     * Get currently ongoing games.
+     */
+    getLiveGames() {
+        return this._requestHandler("GET", `/live`);
+    }
+
+    /**
+     * Get database schema.
+     */
+    getSchema() {
+        return this._requestHandler("GET", `/schema`);
+    }
 }
 
 Mika.FeedClient = FeedClient;
+Mika.Constants = constants;
 module.exports = Mika;

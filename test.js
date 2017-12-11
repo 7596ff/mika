@@ -3,8 +3,8 @@ const Mika = require('./index.js')
 var mika = new Mika();
 
 console.log('starting getPlayer')
-mika.getPlayer('103637655').then((player) => {
-    console.log(`Solo MMR: ${player.solo_competitive_rank}`);
+mika.getPlayer(103637655).then((player) => {
+    console.log(`Rank Tier: ${player.rank_tier}`);
     console.log(`Account ID: ${player.profile.account_id}`);
     console.log(`Name: ${player.profile.personaname}`);
 }).catch((err) => {
