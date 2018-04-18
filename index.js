@@ -21,6 +21,11 @@ class Mika {
 
     _queryString(options) {
         let args = [];
+
+        if (this.key) {
+            options.api_key = this.key;
+        }
+
         for (let p in options) {
             if (options.hasOwnProperty(p)) {
                 if (Array.isArray(options[p])) {
@@ -32,18 +37,12 @@ class Mika {
                 }
             }
         }
+
         return `?${args.join("&")}`;
     }
 
-    _requestHandler(method, url, options) {
+    _requestHandler(method, url) {
         url = this.baseURL + url;
-
-        if (options) {
-            options.api_key = this.key;
-            url += this._queryString(options);
-        } else {
-            url += this._queryString({ api_key: this.key });
-        }
 
         return new Promise((resolve, reject) => {
             this.bucket.enqueue(function() {
