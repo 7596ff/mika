@@ -13,7 +13,7 @@ class Mika {
 
         if (key) {
             this.key = key;
-            this.bucket = new Bucket(0.005);
+            this.bucket = new Bucket(0.2);
         } else {
             this.bucket = new Bucket(1);
         }
