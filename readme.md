@@ -1,16 +1,16 @@
 [![NPM](https://nodei.co/npm/mika.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mika/)
 
-##mika [![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
+## mika [![Build Status](https://travis-ci.org/bippum/mika.svg?branch=master)](https://travis-ci.org/bippum/mika)
 
 an unofficial javascript wrapper for the opendota api. 
 
-###getting started
+### getting started
 
 1. install mika from npm: `npm install mika` or from git: `npm install bippum/mika#master`
 1. read the docs for [mika](https://bippum.github.io/mika/Mika.html) and [opendota](https://docs.opendota.com/)
-1. feel free to msg me on discord (alexa#8058) with any questions, and create an issue here with any bug reports
+1. feel free to msg me on discord (alexa#4444) with any questions, find me in the opendota development server ([discord.gg/opendota](http://www.discord.gg/opendota)), and create an issue here with any bug reports
 
-###examples
+### examples
 
 ```js
 const Mika = require("mika");
