@@ -8,9 +8,15 @@ const constants = require("./constants");
  * The bigol thing
  */
 class Mika {
-    constructor() {
-        this.bucket = new Bucket(1 / 3);
+    constructor(key) {
         this.baseURL = constants.BaseURL;
+
+        if (key) {
+            this.key = key;
+            this.bucket = new Bucket(0.005);
+        } else {
+            this.bucket = new Bucket(1);
+        }
     }
 
     _queryString(options) {
@@ -31,7 +37,14 @@ class Mika {
 
     _requestHandler(method, url, options) {
         url = this.baseURL + url;
-        if (options) url += this._queryString(options);
+
+        if (options) {
+            options.api_key = this.key;
+            url += this._queryString(options);
+        } else {
+            url += this._queryString({ api_key: this.key });
+        }
+
         return new Promise((resolve, reject) => {
             this.bucket.enqueue(function() {
                 needle.request(method, url, null, (err, response, body) => {
