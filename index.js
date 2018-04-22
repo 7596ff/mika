@@ -1,6 +1,6 @@
 const needle = require("needle");
+const Bottleneck = require("bottleneck");
 
-const Bucket = require("./util/Bucket");
 const FeedClient = require("./util/FeedClient");
 const constants = require("./constants");
 
@@ -10,12 +10,18 @@ const constants = require("./constants");
 class Mika {
     constructor(key) {
         this.baseURL = constants.BaseURL;
+        this.key = key;
 
         if (key) {
-            this.key = key;
-            this.bucket = new Bucket(0.2);
+            this.limiter = new Bottleneck({
+                maxConcurrent: 300,
+                minTime: 200
+            });
         } else {
-            this.bucket = new Bucket(1);
+            this.limiter = new Bottleneck({
+                maxConcurrent: 60,
+                minTime: 1000
+            });
         }
     }
 
@@ -45,21 +51,19 @@ class Mika {
         url = this.baseURL + url;
 
         return new Promise((resolve, reject) => {
-            this.bucket.enqueue(function() {
-                needle.request(method, url, null, (err, response, body) => {
-                    if (!err && response.statusCode == 200) {
-                        resolve(body);
+            this.limiter.submit(needle.request, method, url, null, (err, response, body) => {
+                if (!err && response.statusCode == 200) {
+                    resolve(body);
+                } else {
+                    if (response && response.statusCode) {
+                        reject({
+                            "code": response.statusCode,
+                            "error": body
+                        });
                     } else {
-                        if (response && response.statusCode) {
-                            reject({
-                                "code": response.statusCode,
-                                "error": body
-                            });
-                        } else {
-                            reject(err);
-                        }
+                        reject(err);
                     }
-                });
+                }
             });
         });
     }
