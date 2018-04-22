@@ -50,13 +50,8 @@ class Mika {
                     if (!err && response.statusCode == 200) {
                         resolve(body);
                     } else {
-                        if (response && response.statusCode === 500) {
+                        if (response && response.statusCode) {
                             reject({
-                                "code": response.statusCode,
-                                "error": body
-                            });
-                        } else if (response && response.statusCode === 429) {
-                           reject({
                                 "code": response.statusCode,
                                 "error": body
                             });
