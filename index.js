@@ -48,11 +48,15 @@ class Mika {
     }
 
     _requestHandler(method, url) {
+
+        console.log(url)
         if (!url.includes("?")) {
-            url = this._queryString(url, {});
+            url += this._queryString({});
         }
 
         url = this.baseURL + url;
+
+        console.log(url)
 
         return new Promise((resolve, reject) => {
             this.limiter.submit(needle.request, method, url, null, (err, response, body) => {
