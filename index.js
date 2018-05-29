@@ -48,8 +48,6 @@ class Mika {
     }
 
     _requestHandler(method, url) {
-
-        console.log(url)
         if (!url.includes("?")) {
             url += this._queryString({});
         }
