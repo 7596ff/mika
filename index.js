@@ -48,6 +48,10 @@ class Mika {
     }
 
     _requestHandler(method, url) {
+        if (!url.includes("?")) {
+            url = this._queryString(url, {});
+        }
+
         url = this.baseURL + url;
 
         return new Promise((resolve, reject) => {
