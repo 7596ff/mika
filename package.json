@@ -1,6 +1,6 @@
 {
   "name": "mika",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "a javascript wrapper for the opendota api",
   "main": "index.js",
   "scripts": {
