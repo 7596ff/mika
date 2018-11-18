@@ -1,8 +1,7 @@
-const WebsocketURL = require("../constants").WebsocketURL;
-//const WebsocketURL = "ws://192.168.1.120:5000/";
+const FirehoseURL = require("../constants").FirehoseURL;
 const EventEmitter = require("events").EventEmitter;
-const WebSocket = require("ws");
-const n = require("nonce")();
+const needle = require("needle");
+const JSONStream = require("JSONStream");
 
 const allowedTypes = ["player", "team", "league"];
 
@@ -13,132 +12,52 @@ const allowedTypes = ["player", "team", "league"];
 class FeedClient extends EventEmitter {
     constructor() {
         super();    
-        this._url = WebsocketURL;
-        this._retries = 0;
-        this._transactions = {};
+        this._url = FirehoseURL;
+
+        this._subs = {
+            player: [],
+            team: [],
+            league: [],
+        };
     }
 
-    _send(type, message) {
-        return this._wsSend({
-            type,
-            message,
-            uuid: this._uuid
-        });
-    }
+    _processMatch(match) {
+        let found = {
+            player: [],
+            team: [],
+            league: [],
+        };
 
-    _wsSend(message) {
-        return new Promise((resolve, reject) => {
-            let nonce = n();
-            message.nonce = nonce;
-            this._ws.send(JSON.stringify(message), (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    this._transactions[nonce] = {
-                        resolve,
-                        reject
-                    };
-                }
-            });
-        });
-    }
+        found.player = match.players
+            .map((player) => Number(player.account_id))
+            .filter((id) => !!~this._subs.player.indexOf(id)) || [];
 
-    _processMessage(message) {
-        try {
-            message = JSON.parse(message.data);
-        } catch (err) {
-            this.emit("error", err);
-            return;
-        }
+        if (!!~this._subs.team.indexOf(Number(match.radiant_team_id))) found.team.push(Number(match.radiant_team_id));
+        if (!!~this._subs.team.indexOf(Number(match.dire_team_id))) found.team.push(Number(match.dire_team_id));
 
-        if (message.nonce && this._transactions.hasOwnProperty(message.nonce)) {
-            if (message.type.includes("ACK") || message.type === "PONG" || message.type === "IDENTIFY") {
-                this._transactions[message.nonce].resolve(message.message);
-            } else if (message.type.includes("NAK")) {
-                this._transactions[message.nonce].reject(message.message.err || message.message);
-            } else {
-                this.emit("unhandledNonce", message);
-            }
+        if (!!~this._subs.league.indexOf(Number(match.leagueid))) found.league.push(Number(match.leagueid));
 
-            delete this._transactions[message.nonce];
-        } else if (message.type === "MATCH") {
-            /*
-             * Fired when a match is found from the client's subscriptions.
-             * @prop {Object} match the match data
-             * @prop {Object} found which ids were matched in the match
-             * @prop {String} origin where the match came from, either "scanner" or "praser"
-             */
-            this.emit("match", message.message.match, message.message.found, message.message.origin);
-        } else {
-            /*
-             * Fired when an unexpected message is processed.
-             * @event FeedClient#unhandled
-             * @prop {Object} message the message
-             */
-            this.emit("unhandled", message);
-        }
-    }
-
-    _processClose(close) {
-        if (this._uuid === undefined) return;
-
-        if (close.code === 1013) delete this._uuid;
+        if (found.player.concat(found.team.concat(found.league)).length === 0) return;
 
         /*
-         * Emitted when the websocket loses connection.
-         * @event FeedClient#closed
-         * @prop {Object} close the CloseEvent object from ws.
+         * Fired when a match is found from the client's subscriptions.
+         * @prop {Object} match the match data
+         * @prop {Object} found which ids were matched in the match
+         * @prop {String} origin where the match came from, either "scanner" or "praser"
          */
-        this.emit("closed", close);
-        this._retries = 0;
-        this._ws.terminate();
-        if (close.code === 1006) setTimeout(this.connect.bind(this), 2000);
+        this.emit("match", match, found, match.origin);
     }
 
     /*
-     * Tells the client to connect to the websocket.
+     * Tells the client to connect to the firehose.
      */
     connect() {
-        this._ws = new WebSocket(this._url);
-
-        this._ws.on("error", (err) => {
-            this._retries += 1;
-            if (this._retries < 3) {
-                setTimeout(() => {
-                    this.connect();
-                }, 1000);
-            } else {
-                this._shouldReconnect = false;
-                this.emit("error", err);
-            }
-        });
-
-        this._ws.on("open", () => {
-            this._wsSend({
-                "type": "IDENTIFY"
-            }).catch((err) => {
-                console.log(err)
-            }).then((message) => {
-                this._uuid = message.uuid;
-                this.emit("ready", message.uuid);
-                // start heartbeating
-                this.intervalID = setInterval(() => {
-                    setTimeout(() => {
-                        this.ping().catch((err) => this.emit("error", err));
-                    }, Math.floor(Math.random() * 10000)); // add random jitter 
-                }, 60000);
+        needle
+            .get(this._url)
+            .pipe(JSONStream.parse())
+            .on("data", (data) => {
+                this._processMatch(data);
             });
-        });
-
-        this._ws.onmessage = this._processMessage.bind(this);
-        this._ws.onclose = this._processClose.bind(this);
-    }
-
-    /*
-     * "Ping" the websocket.
-     */
-    ping() {
-        return this._send("PING");
     }
 
     /*
@@ -159,7 +78,11 @@ class FeedClient extends EventEmitter {
         ids = ids.map((id) => parseInt(id));
         if (ids.find((id) => id === NaN)) Promise.reject("Invalid IDs");
 
-        return this._send("SUBSCRIBE", { type, ids });
+        this._subs[type] = this._subs[type]
+            .concat(ids)
+            .filter((e, i, a) => a.indexOf(e) === i); // dedupe the array
+
+        return Promise.resolve(this._subs[type]);
     }
 
     /*
@@ -180,7 +103,16 @@ class FeedClient extends EventEmitter {
         ids = ids.map((id) => parseInt(id));
         if (ids.find((id) => id === NaN)) Promise.reject("Invalid IDs");
 
-        return this._send("UNSUBSCRIBE", { type, ids });
+        return new Promise(async (resolve, reject) => {
+            for (let id in ids) {
+                let index = this._subs[type].indexOf(id);
+                if (!~index) continue;
+
+                this._subs[type].splice(index, 1);
+            }
+
+            resolve(this._subs[type]);
+        });
     }
 
     /*
@@ -188,8 +120,9 @@ class FeedClient extends EventEmitter {
      * @returns {Promise<Object>}
      */
     getSubs() {
-        return this._send("GET_SUBS");
+        return this._subs;
     }
 }
 
 module.exports = FeedClient;
+
